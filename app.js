@@ -24,7 +24,7 @@ mongoose.connect("mongodb://localhost:27017/yelp_camp",{ useNewUrlParser: true }
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine","ejs");
 app.use(express.static(__dirname+"/public"));
-//__dirname is equivalent to /home/ubuntu/workspace/YelpCamp/v5 
+//__dirname is equivalent to /home/ubuntu/workspace/YelpCamp/v5
 //console.log(__dirname);
 app.use(methodOverride("_method"));
 
@@ -65,6 +65,6 @@ app.use(indexRoutes);
 app.use(commentRoutes);
 app.use(campgroundRoutes);
 
-app.listen(process.env.PORT,process.env.IP,function(){
+app.listen(5000,function(){
     console.log("Server has started");
 });
