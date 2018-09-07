@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- BootStrap CDN -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="/stylesheets/campground.css">
+    <title>YelpCamp</title>
+  </head>
+  <body>
+
+<!--BootStrap Navbar-->
+
+<nav class = "navbar navbar-default">
+    <div class = "container-fluid">
+        <div class = "navbar-header">
+            <a class = "navbar-brand" href="/">YelpCamp</a>
+        </div>
+        
+        <div class = "collapse navbar-collapse">
+            <ul class = "nav navbar-nav navbar-right">
+                <% if(!currentUser){ %>
+                <li><a href="/login">Login</a></li>
+                <li><a href="/register">Register</a></li>
+               <%  } else {%>
+               <li> <a>Signed In As <%=currentUser.username %> </a> </li>
+               <li><a href="/logout">LogOut</a></li>
+               <%  } %>
+               
+    
+                
+                
+            </ul>
+        </div>
+        
+    </div>
+</nav>
+

@@ -1,0 +1,23 @@
+.flex {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+/*selecting all images inside thumnails*/
+
+.thumbnail img{
+  width: 100%;
+}
+
+.thumbnail{
+  padding: 0;
+}
+
+/*selecting all caption fulls inside thumbnail*/
+.thumbnail .caption-full{
+  padding: 9px;
+}
+
+#delete-form{
+  display: inline;
+}
