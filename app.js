@@ -61,9 +61,9 @@ app.use(function(req,res,next){
     next();
 });
 
-app.use(indexRoutes);
-app.use(commentRoutes);
-app.use(campgroundRoutes);
+app.use("/yelpcamp",indexRoutes);
+app.use("/yelpcamp",commentRoutes);
+app.use("/yelpcamp",campgroundRoutes);
 
 app.listen(5000,function(){
     console.log("Server has started");

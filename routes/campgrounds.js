@@ -28,9 +28,9 @@ router.get("/campgrounds",function(req,res){
                 res.render("campgrounds/index",{campgrounds:campgrounds, currentUser:req.user});
             }
     });
-        
+
     }
-    
+
     //if no search string exists, just show all the campgrounds
     else{
             Campground.find({},function(err,campgrounds){
@@ -47,8 +47,8 @@ router.get("/campgrounds",function(req,res){
 
 //our create route- add new campground to database
 
-router.post("/campgrounds",isLoggedIn,function(req,res){
-   
+router.post("/yelpcamp/campgrounds",isLoggedIn,function(req,res){
+
     var name = req.body.name;
     var image = req.body.image;
     var description = req.body.description;
@@ -57,21 +57,21 @@ router.post("/campgrounds",isLoggedIn,function(req,res){
         username: req.user.username
     };
     var object = {name:name, image:image, description:description, author:author};
-   
+
     //creating a new campground
     Campground.create(object,function(err,campground){
        if(err){
         console.log(err)
        }
        else{
-           res.redirect("/campgrounds");
+           res.redirect("/yelpcamp/campgrounds");
        }
     });
 });
 
 //our new route - show the new campground form
 router.get("/campgrounds/new",isLoggedIn,function(req,res){
-    
+
     res.render("campgrounds/new");
 })
 
@@ -103,22 +103,22 @@ router.put("/campgrounds/:id",checkCamgroundOwnership,function(req,res){
     Campground.findByIdAndUpdate(req.params.id,req.body.campground,
     function(err,updatedCampground){
         if(err){
-            res.redirect("/campgrounds");
+            res.redirect("/yelpcamp/campgrounds");
         } else{
             //redirect to show page
-            res.redirect("/campgrounds/"+req.params.id);
+            res.redirect("/yelpcamp/campgrounds/"+req.params.id);
         }
     });
-    
+
 });
 
 //DESTROY CAMPGROUND ROUTE
 router.delete("/campgrounds/:id",checkCamgroundOwnership,function(req,res){
     Campground.findByIdAndRemove(req.params.id,function(err){
         if(err){
-            res.redirect("/campgrounds");
+            res.redirect("/yelpcamp/campgrounds");
         }else{
-            res.redirect("/campgrounds");
+            res.redirect("/yelpcamp/campgrounds");
         }
     });
 });
@@ -129,7 +129,7 @@ function isLoggedIn(req,res,next){
     if(req.isAuthenticated()){
         return next();
     }
-    res.redirect("/login");
+    res.redirect("/yelpcamp/login");
 };
 
 
@@ -142,9 +142,9 @@ function checkCamgroundOwnership(req,res,next){
             } else{
                 //if s/he is logged in, does s/he own the campground
                  if(foundCampground.author.id.equals(req.user._id)){
-                    //we will be moving on the next function, which may be 
+                    //we will be moving on the next function, which may be
                     //update or delete
-                   next(); 
+                   next();
                 } else{
                     res.redirect("back");
                 }

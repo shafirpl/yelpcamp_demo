@@ -19,12 +19,12 @@ router.get("/campgrounds/:id/comments/new",isLoggedIn,function(req, res) {
             res.render("comments/new",{campground:foundItem});
         }
     });
-    
+
 });
 
 //comment create
 router.post("/campgrounds/:id/comments",isLoggedIn,function(req,res){
-    
+
         Campground.findById(req.params.id,function(err,foundItem){
         if(err){
             console.log(err);
@@ -37,14 +37,14 @@ router.post("/campgrounds/:id/comments",isLoggedIn,function(req,res){
                 else{
                          // add username and id to comment
                         // save comment
-                        
+
                         //The way we could get the user is to
                         //use req.user(), because
-                        //recall that the only way an user can post 
-                        //a comment if s/he is logged in, so 
+                        //recall that the only way an user can post
+                        //a comment if s/he is logged in, so
                         //req.user() should have the username
                         //req.user contains username and id
-                    
+
                     //this associate/fill up the id section of our author in the comment.js file in model
                     comment.author.id = req.user._id;
                     //this associate/fill up the user section of our author in the comment.js file in model
@@ -54,12 +54,12 @@ router.post("/campgrounds/:id/comments",isLoggedIn,function(req,res){
                     foundItem.comments.push(comment);
                     foundItem.save();
                     console.log(comment);
-                    res.redirect("/campgrounds/"+foundItem._id);
+                    res.redirect("/yelpcamp/campgrounds/"+foundItem._id);
                 }
             });
         }
     });
-    
+
 });
 
 //middleware
@@ -67,7 +67,7 @@ function isLoggedIn(req,res,next){
     if(req.isAuthenticated()){
         return next();
     }
-    res.redirect("/login");
+    res.redirect("/yelpcamp/login");
 };
 
 module.exports = router;

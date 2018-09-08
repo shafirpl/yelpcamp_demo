@@ -19,10 +19,10 @@ router.post("/register",function(req,res){
         }
         else{
             passport.authenticate("local")(req,res,function(){
-                res.redirect("/campgrounds");
+                res.redirect("/yelpcamp/campgrounds");
             });
         }
-        
+
     });
 });
 
@@ -35,24 +35,24 @@ router.get("/login",function(req, res) {
 //login routes
 router.post("/login", passport.authenticate("local",
 {
-    successRedirect:"/campgrounds",
-    failureRedirect:"/login"
+    successRedirect:"/yelpcamp/campgrounds",
+    failureRedirect:"/yelpcamp/login"
 }) ,function(req, res) {
-    
+
 });
 
 //log out route
 
 router.get("/logout",function(req,res){
     req.logout();
-    res.redirect("/campgrounds");
+    res.redirect("/yelpcamp/campgrounds");
 });
 
 function isLoggedIn(req,res,next){
     if(req.isAuthenticated()){
         return next();
     }
-    res.redirect("/login");
+    res.redirect("/yelpcamp/login");
 }
 
 router.get("/",function(req,res){
